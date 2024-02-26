@@ -21,7 +21,7 @@ similarity = np.concatenate([v, v1, v2, v3, v4, v5, v6, v7], axis=0)
 def getresponse(uid):
     response = requests.post(f'https://api.themoviedb.org/3/movie/{uid}?api_key=7e24300fc9f72f2bd7977f808cbcd06f')
     data = response.json()
-    return "https:image.tmdb.org/t/p/w500/" + data['poster_path'], data['overview']
+    return "https:image.tmdb.org/t/p/w500/" + data['poster_path']
 
 
 def recommend(name):
@@ -34,11 +34,10 @@ def recommend(name):
     for i in movie_list:
         recommend_movies.append(movies['title'][i[0]])
     for i in movie_list:
-        a, b = getresponse(movies['id'][i[0]])
-        movie_overview.append(b)
+        a = getresponse(movies['id'][i[0]])
         movie_poster.append(a)
 
-    return recommend_movies, movie_poster,movie_overview
+    return recommend_movies, movie_poster
 
 
 movies = pd.DataFrame(movies)
@@ -60,7 +59,7 @@ if st.button("RECOMMEND"):
         with col2:
             st.header(name[0])
         st.image(path[0], width=350)
-        st.write(':red[OVERVIEW :]', str(overview[0]))
+        #st.write(':red[OVERVIEW :]', str(overview[0]))
 
     with st.container(border=True):
         col3, col4 = st.columns([0.1, 3])
@@ -69,7 +68,7 @@ if st.button("RECOMMEND"):
         with col4:
             st.header(name[1])
         st.image(path[1], width=350)
-        st.write(':red[OVERVIEW :]', str(overview[1]))
+        #st.write(':red[OVERVIEW :]', str(overview[1]))
 
     with st.container(border=True):
         col5, col6 = st.columns([0.1, 3])
@@ -78,7 +77,7 @@ if st.button("RECOMMEND"):
         with col6:
             st.header(name[2])
         st.image(path[2], width=350)
-        st.write(':red[OVERVIEW :]', str(overview[2]))
+       #st.write(':red[OVERVIEW :]', str(overview[2]))
 
     with st.container(border=True):
         col7, col8 = st.columns([0.1, 3])
@@ -87,7 +86,7 @@ if st.button("RECOMMEND"):
         with col8:
             st.header(name[3])
         st.image(path[3], width=350)
-        st.write(':red[OVERVIEW :]', str(overview[3]))
+        #st.write(':red[OVERVIEW :]', str(overview[3]))
     with st.container(border=True):
         col9, col10 = st.columns([0.1, 3])
         with col9:
@@ -95,5 +94,5 @@ if st.button("RECOMMEND"):
         with col10:
             st.header(name[4])
         st.image(path[4], width=350)
-        st.write(':red[OVERVIEW :]', str(overview[4]))
+        #st.write(':red[OVERVIEW :]', str(overview[4]))
 
